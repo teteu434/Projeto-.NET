@@ -1,0 +1,6 @@
+@SistemaMatheus_HostAddress = http://localhost:5121
+
+GET {{SistemaMatheus_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
