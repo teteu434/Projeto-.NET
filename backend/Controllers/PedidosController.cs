@@ -97,7 +97,7 @@ namespace SistemaMatheus.Controllers
         /// <remarks>
         /// Lista todos os pedidos do banco de dados
         /// </remarks>
-        /// <param name="req">Identificador do Pedido</param>
+        /// <param name="id">Identificador do Pedido</param>
         /// <returns>Retorna os pedidos do banco</returns>
         /// <response code="200">Lista de Produtos</response>
         /// <response code="404">Pedido não encontrado</response>

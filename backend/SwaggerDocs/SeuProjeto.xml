@@ -35,6 +35,7 @@
             <remarks>
             Lista todos os pedidos do banco de dados
             </remarks>
+            <param name="id">Identificador do Pedido</param>
             <returns>Retorna os pedidos do banco</returns>
             <response code="200">Lista de Produtos</response>
             <response code="404">Pedido não encontrado</response>
@@ -65,7 +66,7 @@
         </member>
         <member name="M:SistemaMatheus.Controllers.ProdutosController.GetProdutoId(System.Int32)">
             <summary>
-            Busca de Produtos
+            Busca de Produtos.
             </summary>
             <remarks>
             Busca um produto específico do banco de dados.
@@ -83,7 +84,7 @@
             <remarks>
             É escolhido um campo e seu novo valor para ser atualizado em uma row específica do banco de dados.
             </remarks>
-            <param name="id">id do produto buscado</param>
+            <param name="id">Identificador do produto</param>
             <param name="req">Coluna e o valor que serão alterados</param>
             <returns>Retorna o produto novo alterado</returns>
             <response code="200">Produto alterado com sucesso</response>
@@ -98,7 +99,7 @@
             <remarks>
             Exclui um produto do banco de dados.
             </remarks>
-            <param name="id">identificador do produto no banco</param>
+            <param name="id">Identificador do produto</param>
             <returns></returns>
             <response code="200">Produto Excluído com sucesso</response>
             <response code="404">Produto não encontrado</response>
