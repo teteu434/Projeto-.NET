@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SistemaMatheus</name>
+    </assembly>
+    <members>
+        <member name="M:SistemaMatheus.Controllers.PedidosController.PostPedido(SistemaMatheus.DTO.CriarPedidoRequest)">
+            <summary>
+            Cadastro de Pedidos.
+            </summary>
+            <remarks>
+            Cadastra o pedido no banco de dados, antes conferindo o estoque nos produtos. Se tiver, adiciona novo pedido e retira as quantidade de produtos.
+            </remarks>
+            <param name="req">Nome do cliente, e todos os produtos do cliente juntamente com seus quantidades</param>
+            <returns>Retorna o pedido criado</returns>
+            <response code="201">Produto Criado com sucesso</response>
+            <response code="400">Retorna erros de validação de produtos. Com relação a quantidade ou ID do produto</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="M:SistemaMatheus.Controllers.PedidosController.GetPedido">
+            <summary>
+            Lista de Pedidos.
+            </summary>
+            <remarks>
+            Lista todos os pedidos do banco de dados
+            </remarks>
+            <returns>Retorna os pedidos do banco</returns>
+            <response code="200">Lista de Pedidos</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="M:SistemaMatheus.Controllers.PedidosController.GetPedidoId(System.Int32)">
+            <summary>
+            Lista de Pedidos.
+            </summary>
+            <remarks>
+            Lista todos os pedidos do banco de dados
+            </remarks>
+            <returns>Retorna os pedidos do banco</returns>
+            <response code="200">Lista de Produtos</response>
+            <response code="404">Pedido não encontrado</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="M:SistemaMatheus.Controllers.ProdutosController.PostProduto(SistemaMatheus.Models.Produtos)">
+            <summary>
+            Cadastro de Produtos.
+            </summary>
+            <remarks>
+            Cadastra o produto no Banco de dados.
+            </remarks>
+            <param name="produto">Dados de cadastro do usuário</param>
+            <returns>Retorna o produto criado</returns>
+            <response code="201">Produto Criado com sucesso</response>
+            <response code="400">Retorna erros de validação</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="M:SistemaMatheus.Controllers.ProdutosController.GetProduto">
+            <summary>
+            Lista de Produtos.
+            </summary>
+            <remarks>
+            Retorna todos os produtos presentes no Banco de dados.
+            </remarks>
+            <returns>Retorna uma lista de produtos</returns>
+            <response code="200">Produto Criado com sucesso</response>
+        </member>
+        <member name="M:SistemaMatheus.Controllers.ProdutosController.GetProdutoId(System.Int32)">
+            <summary>
+            Busca de Produtos
+            </summary>
+            <remarks>
+            Busca um produto específico do banco de dados.
+            </remarks>
+            <param name="id">Identificador do produto</param>
+            <returns>Retorna o produto buscado do banco de dados</returns>
+            <response code="200">Produto foi encontrado com sucesso</response>
+            <response code="404">Produto buscado não foi encontrado</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="M:SistemaMatheus.Controllers.ProdutosController.UpdateProduto(System.Int32,SistemaMatheus.DTO.UpdateProdutoRequest)">
+            <summary>
+            Atualização de Produtos.
+            </summary>
+            <remarks>
+            É escolhido um campo e seu novo valor para ser atualizado em uma row específica do banco de dados.
+            </remarks>
+            <param name="id">id do produto buscado</param>
+            <param name="req">Coluna e o valor que serão alterados</param>
+            <returns>Retorna o produto novo alterado</returns>
+            <response code="200">Produto alterado com sucesso</response>
+            <response code="400">Erros de tipo de valor da coluna</response>
+            <response code="404">Produto não encontrado</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="M:SistemaMatheus.Controllers.ProdutosController.DeleteProduto(System.Int32)">
+            <summary>
+            Exclusão de Produtos.
+            </summary>
+            <remarks>
+            Exclui um produto do banco de dados.
+            </remarks>
+            <param name="id">identificador do produto no banco</param>
+            <returns></returns>
+            <response code="200">Produto Excluído com sucesso</response>
+            <response code="404">Produto não encontrado</response>
+            <response code="500">Erro interno do servidor</response>
+        </member>
+        <member name="T:SistemaMatheus.Migrations.Inicial">
+            <inheritdoc />
+        </member>
+        <member name="M:SistemaMatheus.Migrations.Inicial.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SistemaMatheus.Migrations.Inicial.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SistemaMatheus.Migrations.Inicial.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:SistemaMatheus.Migrations.CriarPedidos">
+            <inheritdoc />
+        </member>
+        <member name="M:SistemaMatheus.Migrations.CriarPedidos.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SistemaMatheus.Migrations.CriarPedidos.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SistemaMatheus.Migrations.CriarPedidos.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

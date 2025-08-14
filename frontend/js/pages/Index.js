@@ -1,4 +1,7 @@
-// função que busca um item do cardápio
+/**
+ * Adiciona um listener ao botão de busca de produto.
+ * Realiza uma requisição GET para buscar um produto pelo ID informado.
+ */
 document.getElementById("buscaProduto").addEventListener('click', async(e) =>{
     e.preventDefault();
     const id = document.getElementById('buscaCodigoProduto').value.trim();
@@ -26,13 +29,18 @@ document.getElementById("buscaProduto").addEventListener('click', async(e) =>{
             console.log(error)
         }
     }
-
+    // Limpa o campo após a busca
     document.getElementById('buscaCodigoProduto').value = "";
 })
 
-// função que insere um item no cardápio
+/**
+ * Adiciona um listener ao botão de criação de produto.
+ * Realiza uma requisição POST para adicionar um novo produto no banco.
+ */
 document.getElementById("criarProduto").addEventListener('click', async(e) =>{
     e.preventDefault();
+
+    // Captura e valida os valores dos campos
     const nome = document.getElementById('nome').value.trim();
     const descricao = document.getElementById('descricao').value.trim();
     const preco = document.getElementById('preco').value.trim();
@@ -76,7 +84,10 @@ document.getElementById("criarProduto").addEventListener('click', async(e) =>{
     document.getElementById('qtd').value = ''
 })
 
-// função que deleta um item do cardápio
+/**
+ * Adiciona um listener ao botão de exclusão de produto.
+ * Realiza uma requisição DELETE para remover um produto pelo ID informado.
+ */
 document.getElementById("deletarProduto").addEventListener('click', async(e) =>{
     e.preventDefault();
     const id = document.getElementById('codigoProdutoDeletar').value.trim();
@@ -101,7 +112,10 @@ document.getElementById("deletarProduto").addEventListener('click', async(e) =>{
     document.getElementById('codigoProdutoDeletar').value = "";
 })
 
-// função que atualiza um item do cardápio
+/**
+ * Adiciona um listener ao botão de atualização de produto.
+ * Realiza uma requisição PUT para atualizar um campo específico de um produto.
+ */
 document.getElementById("update").addEventListener('click', async(e) =>{
     e.preventDefault();
     const id = document.getElementById('idAtualizaProduto').value.trim();
@@ -146,9 +160,14 @@ document.getElementById("update").addEventListener('click', async(e) =>{
     document.getElementById('select').value = ''
 })
 
-// função que lista todos os itens do cardápio
+/**
+ * Adiciona um listener ao botão de listagem de produtos.
+ * Realiza uma requisição GET e exibe todos os produtos na tabela HTML.
+ */
 document.getElementById("listarProduto").addEventListener('click', async(e) =>{
     e.preventDefault();
+
+    // É criada uma tabela que vai sendo incrementada com os valores do banco de dados.
     let inner = `<thead>
         <tr>
             <th>Id</th>
@@ -168,7 +187,8 @@ document.getElementById("listarProduto").addEventListener('click', async(e) =>{
         });
                     
         const produtos = await resposta.json();
-        
+
+        // Adiciona cada produto na tabela
         produtos.forEach(produto => {
             inner += `<tr>
                 <td>${produto.id}</td>

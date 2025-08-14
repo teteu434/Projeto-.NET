@@ -20,6 +20,19 @@ namespace SistemaMatheus.Controllers
             _databaseContext = databaseContext;
         }
 
+        /// <summary>
+        /// Cadastro de Pedidos.
+        /// </summary>
+        /// <remarks>
+        /// Cadastra o pedido no banco de dados, antes conferindo o estoque nos produtos. Se tiver, adiciona novo pedido e retira as quantidade de produtos.
+        /// </remarks>
+        /// <param name="req">Nome do cliente, e todos os produtos do cliente juntamente com seus quantidades</param>
+        /// <returns>Retorna o pedido criado</returns>
+        /// <response code="201">Produto Criado com sucesso</response>
+        /// <response code="400">Retorna erros de validação de produtos. Com relação a quantidade ou ID do produto</response>
+        /// <response code="500">Erro interno do servidor</response>
+        [ProducesResponseType(typeof(Pedidos), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> PostPedido([FromBody] CriarPedidoRequest req)
         {
@@ -58,6 +71,18 @@ namespace SistemaMatheus.Controllers
             return Created($"/api/pedidos/{pedido.Id}", pedido);
         }
 
+
+        /// <summary>
+        /// Lista de Pedidos.
+        /// </summary>
+        /// <remarks>
+        /// Lista todos os pedidos do banco de dados
+        /// </remarks>
+        /// <returns>Retorna os pedidos do banco</returns>
+        /// <response code="200">Lista de Pedidos</response>
+        /// <response code="500">Erro interno do servidor</response>
+        [ProducesResponseType(typeof(Produtos), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet]
 
         public async Task<ActionResult<Pedidos>> GetPedido()
@@ -65,7 +90,20 @@ namespace SistemaMatheus.Controllers
             var pedidos = await _databaseContext.Pedidos.ToListAsync();
             return Ok(pedidos);
         }
-        
+
+        /// <summary>
+        /// Lista de Pedidos.
+        /// </summary>
+        /// <remarks>
+        /// Lista todos os pedidos do banco de dados
+        /// </remarks>
+        /// <param name="req">Identificador do Pedido</param>
+        /// <returns>Retorna os pedidos do banco</returns>
+        /// <response code="200">Lista de Produtos</response>
+        /// <response code="404">Pedido não encontrado</response>
+        /// <response code="500">Erro interno do servidor</response>
+        [ProducesResponseType(typeof(Pedidos), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
 
         public async Task<ActionResult<Pedidos>> GetPedidoId(int id)
