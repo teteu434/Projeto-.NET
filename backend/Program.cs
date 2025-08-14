@@ -2,12 +2,25 @@ using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 using SistemaMatheus.Data;
 
-Env.Load();
+Env.Load(@"../.env");
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// 🔹 Configuração de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://127.0.0.1:3000") // URL do seu front
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
 
 var connectionString =
     $"Host={Environment.GetEnvironmentVariable("DB_HOST")};" +
@@ -37,6 +50,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// 🔹 Ativar CORS antes da autorização
+app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 

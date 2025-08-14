@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using SistemaMatheus.Data;
 using SistemaMatheus.Models;
+using SistemaMatheus.DTO;
 
 namespace SistemaMatheus.Controllers
 {
@@ -26,7 +27,7 @@ namespace SistemaMatheus.Controllers
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            _databaseContext.SistemaMatheus.Add(produto);
+            _databaseContext.Produtos.Add(produto);
             await _databaseContext.SaveChangesAsync();
             return Created($"/api/produtos/{produto.Id}",produto);
         }
@@ -35,7 +36,7 @@ namespace SistemaMatheus.Controllers
 
         public async Task<ActionResult<Produtos>> GetProduto()
         {
-            var produtos = await _databaseContext.SistemaMatheus.ToListAsync();
+            var produtos = await _databaseContext.Produtos.ToListAsync();
             return Ok(produtos);
         }
 
@@ -43,7 +44,7 @@ namespace SistemaMatheus.Controllers
 
         public async Task<ActionResult<Produtos>> GetProdutoId(int id)
         {
-            var produto = await _databaseContext.SistemaMatheus.FindAsync(id);
+            var produto = await _databaseContext.Produtos.FindAsync(id);
             if (produto == null)
             {
                 return NotFound("Produto não encontrado!");
@@ -55,7 +56,7 @@ namespace SistemaMatheus.Controllers
 
         public async Task<IActionResult> UpdateProduto(int id, [FromBody] UpdateProdutoRequest req)
         {
-            var produto = await _databaseContext.SistemaMatheus.FindAsync(id);
+            var produto = await _databaseContext.Produtos.FindAsync(id);
 
             if (produto == null)
             {
@@ -85,7 +86,13 @@ namespace SistemaMatheus.Controllers
 
                 case "qtd":
                     if (req.Valor.ValueKind != JsonValueKind.Number)
-                        return BadRequest("O campo 'quantidade' deve ser int.");
+                        return BadRequest("O campo 'quantidade' deve ser um inteiro.");
+                        
+                    if (req.Valor.TryGetInt32(out int qtdInteira))
+                        produto.Qtd = qtdInteira;
+                    else
+                        return BadRequest("O campo 'quantidade' deve ser um número inteiro (sem decimais).");
+                    
                     produto.Qtd = (int)req.Valor.GetInt32();
                     break;
 
@@ -100,14 +107,14 @@ namespace SistemaMatheus.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduto(int id)
         {
-            var produto = await _databaseContext.SistemaMatheus.FindAsync(id);
+            var produto = await _databaseContext.Produtos.FindAsync(id);
 
             if (produto == null)
             {
                 return NotFound("Produto não encontrado!");
             }
 
-            _databaseContext.SistemaMatheus.Remove(produto);
+            _databaseContext.Produtos.Remove(produto);
             await _databaseContext.SaveChangesAsync();
             return Ok("Deletado com sucesso");            
         }

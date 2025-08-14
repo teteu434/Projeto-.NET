@@ -21,6 +21,25 @@ namespace SistemaMatheus.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("SistemaMatheus.Models.Pedidos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Nome")
+                        .HasColumnType("text");
+
+                    b.Property<double>("Valor")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Pedidos");
+                });
+
             modelBuilder.Entity("SistemaMatheus.Models.Produtos", b =>
                 {
                     b.Property<int>("Id")
@@ -29,8 +48,8 @@ namespace SistemaMatheus.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Descricao")
-                        .HasColumnType("integer");
+                    b.Property<string>("Descricao")
+                        .HasColumnType("text");
 
                     b.Property<string>("Nome")
                         .HasColumnType("text");
@@ -43,7 +62,7 @@ namespace SistemaMatheus.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SistemaMatheus");
+                    b.ToTable("Produtos");
                 });
 #pragma warning restore 612, 618
         }
